@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>Yandex.Metrica</name>
+  </assembly>
+  <members>
+    <member name="T:Yandex.Metrica.YandexMetrica">
+      <summary>
+            Static class which exposes methods for Metrica operations.
+            </summary>
+    </member>
+    <member name="M:Yandex.Metrica.YandexMetrica.Activate(System.String)">
+      <summary>
+            Start Metrica service with specified options.
+            </summary>
+      <param name="apiKey">Yandex.Metrica API Key value. Must be a string with a valid GUID.</param>
+    </member>
+    <member name="P:Yandex.Metrica.YandexMetrica.LibraryVersion">
+      <summary>
+            Version of library.
+            </summary>
+    </member>
+    <member name="M:Yandex.Metrica.YandexMetrica.ReportError(System.String,System.Exception)">
+      <summary>
+            Report an error or a handled exception. Returns immediately.
+            </summary>
+      <param name="message">Description of an error.</param>
+      <param name="ex">Exception object.</param>
+    </member>
+    <member name="M:Yandex.Metrica.YandexMetrica.ReportEvent(System.String)">
+      <summary>
+            Report application event. Returns immediately.
+            </summary>
+      <param name="eventName">Event name.</param>
+    </member>
+    <member name="M:Yandex.Metrica.YandexMetrica.ReportEvent(System.String,System.Collections.IDictionary)">
+      <summary>
+            Report application event. Returns immediately.
+            </summary>
+      <param name="eventName">Event name.</param>
+      <param name="infoDictionary">IDictionary containing additional info for event. Keys/values should be convertible to string.</param>
+    </member>
+    <member name="M:Yandex.Metrica.YandexMetrica.ReportEvent(System.String,System.String)">
+      <summary>
+            Report application event. Returns immediately.
+            </summary>
+      <param name="eventName">Event name.</param>
+      <param name="jsonInfoString">JSON string containing additional info for event.</param>
+    </member>
+    <member name="M:Yandex.Metrica.YandexMetrica.ReportExit">
+      <summary>
+            Call this method when application is about to exit.
+            This allows metrica to save its state and cached events.
+            </summary>
+    </member>
+    <member name="M:Yandex.Metrica.YandexMetrica.ReportUnhandledException(System.Exception)">
+      <summary>
+            Report unhandled exception. Does not return immediately.
+            </summary>
+      <param name="ex">Unhandled exception object.</param>
+    </member>
+    <member name="P:Yandex.Metrica.YandexMetrica.ServerInteractionEnabled">
+      <summary>
+            Indicates library is allowed to connect to server.
+            </summary>
+    </member>
+    <member name="M:Yandex.Metrica.YandexMetrica.SetCustomAppVersion(System.Version)">
+      <summary>
+            Specify version of application.
+            </summary>
+      <param name="version">Application version to be reported.</param>
+    </member>
+    <member name="M:Yandex.Metrica.YandexMetrica.SetLocation(System.Double,System.Double)">
+      <summary>
+            Specify session location explicitly.
+            </summary>
+      <param name="latitude">Location latitude.</param>
+      <param name="longitude">Location longitude.</param>
+    </member>
+    <member name="M:Yandex.Metrica.YandexMetrica.SetReportCrashesEnabled(System.Boolean)">
+      <summary>
+            Specify if library should catch unhandled exceptions.
+            </summary>
+      <param name="enabled">Boolean value to enable or disable collecting and sending crash reports.</param>
+    </member>
+    <member name="M:Yandex.Metrica.YandexMetrica.SetSessionTimeout(System.TimeSpan)">
+      <summary>
+            Specify session timeout.
+            </summary>
+      <param name="timeout">Time limit before the application is considered inactive.</param>
+    </member>
+    <member name="M:Yandex.Metrica.YandexMetrica.SetTrackLocationEnabled(System.Boolean)">
+      <summary>
+            Specify if library can use location services.
+            </summary>
+      <param name="enabled">Flag indicating if reporting location to Metrica enabled.</param>
+    </member>
+    <member name="M:Yandex.Metrica.YandexMetrica.Start(System.UInt32)">
+      <summary>
+            (Obsolete)Start Metrica service with specified options.
+            </summary>
+      <param name="apiKey">Mandatory ApiKey.</param>
+    </member>
+  </members>
+</doc>
