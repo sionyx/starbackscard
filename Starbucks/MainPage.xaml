@@ -1,0 +1,208 @@
+﻿<Page
+    x:Class="Starbucks.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:windowsPhone81="using:Microsoft.AdMediator.WindowsPhone81"
+    mc:Ignorable="d"
+    
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    DataContext="{Binding Path=MainViewModel, Source={StaticResource CompositionRoot}}" >
+    
+    <Grid x:Name="LayoutRoot" >
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- TitlePanel -->
+        <StackPanel Grid.Row="0" Margin="24,17,0,28">
+            <TextBlock Text="STARBUCKS" Style="{ThemeResource TitleTextBlockStyle}" Typography.Capitals="SmallCaps"/>
+            <TextBlock Text="моя карта" Margin="0,12,0,0" Style="{ThemeResource HeaderTextBlockStyle}"/>
+        </StackPanel>
+
+        <Grid Grid.Row="1">
+        
+        
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+            <Image Grid.Row="0" 
+                   x:Name="CardFace"
+                   Source="Assets/cardface.png" 
+                   Margin="24" >
+                <Image.Projection>
+                    <PlaneProjection />
+                </Image.Projection>
+                <i:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Tapped">
+                        <core:InvokeCommandAction Command="{Binding CardTapCommand}" />
+                    </core:EventTriggerBehavior>
+                </i:Interaction.Behaviors>
+            </Image>
+
+            <Grid Grid.Row="0"
+                  x:Name="CardBack"
+                  Visibility="Collapsed" >
+                <Grid.Projection>
+                    <PlaneProjection />
+                </Grid.Projection>
+                <Image Grid.Row="0" 
+                       Source="Assets/cardback.png" 
+                       Margin="24" />
+                <Image Grid.Row="0" 
+                       Source="{Binding BarCode}"
+                       VerticalAlignment="Center"
+                       Margin="140,0,48,0"/>
+                <i:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Tapped">
+                        <core:InvokeCommandAction Command="{Binding CardTapCommand}" />
+                    </core:EventTriggerBehavior>
+                </i:Interaction.Behaviors>
+            </Grid>
+
+            <TextBlock Grid.Row="1" 
+                       Style="{StaticResource TitleTextBlockStyle}"
+                       FontSize="28"
+                       HorizontalAlignment="Center">
+                <Run Text="Баланс" />
+                <Run Text="{Binding Balance}" FontSize="42" />
+                <Run Text="руб." />
+            </TextBlock>
+        
+        </Grid>
+
+        <Grid x:Name="ProgressShadow"
+              Grid.Row="0" 
+              Grid.RowSpan="2" 
+              Visibility="Collapsed" >
+            <Border Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                    Opacity="0.7" />
+            <ProgressBar IsIndeterminate="{Binding InProgress}" />
+        </Grid>
+
+        <windowsPhone81:AdMediatorControl Grid.Row="2" 
+                                          x:Name="AdMediator_C9D4A2" 
+                                          Id="AdMediator-Id-54E05885-33B6-408C-B994-5076464AC48C" 
+                                          Height="67" 
+                                          Width="400"
+                                          AdSdkEvent="AdMediatorControl_OnAdSdkEvent"
+                                          AdSdkError="AdMediatorControl_OnAdSdkError"
+                                          AdMediatorFilled="AdMediatorControl_OnAdMediatorFilled"
+                                          AdMediatorError="AdMediatorControl_OnAdMediatorError"
+                                          Margin="0,-12,0,0"/>
+
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="CardSide">
+                <VisualState x:Name="CardSideFace">
+                    <Storyboard>
+<!--                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="CardFace"-->
+<!--                                                       Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationY)">-->
+<!--                            <LinearDoubleKeyFrame KeyTime="0:0:0" Value="0" />-->
+<!--                            <LinearDoubleKeyFrame KeyTime="0:0:1" Value="10" />-->
+<!--                            <LinearDoubleKeyFrame KeyTime="0:0:2" Value="0" />-->
+<!--                            <LinearDoubleKeyFrame KeyTime="0:0:3" Value="-10" />-->
+<!--                        </DoubleAnimationUsingKeyFrames>-->
+
+<!--                        <DoubleAnimation Duration="0:0:1" -->
+<!--                                         BeginTime="0"-->
+<!--                                         From="0" -->
+<!--                                         To="89" -->
+<!--                                         Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationY)" -->
+<!--                                         Storyboard.TargetName="CardBack" />-->
+<!--                        <DoubleAnimation Duration="0:0:1" -->
+<!--                                         To="0" -->
+<!--                                         Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationY)" -->
+<!--                                         Storyboard.TargetName="CardFace" />-->
+
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="CardSideBack">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CardFace" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame Value="Collapsed" KeyTime="0"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CardBack" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame Value="Visible" KeyTime="0"/>
+                        </ObjectAnimationUsingKeyFrames>
+<!--                        <DoubleAnimation Duration="0:0:1" -->
+<!--                                         BeginTime="0:0:1"-->
+<!--                                         From="89" -->
+<!--                                         To="0" -->
+<!--                                         Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationY)" Storyboard.TargetName="CardBack" />-->
+<!--                        <DoubleAnimation Duration="0:0:1" -->
+<!--                                         To="360" -->
+<!--                                         Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationY)" -->
+<!--                                         Storyboard.TargetName="CardFace" />-->
+
+                    </Storyboard>
+                </VisualState>
+<!--                <VisualStateGroup.Transitions>-->
+<!--                    <VisualTransition From="CardSideFace" To="CardSideBack">-->
+<!--                        <Storyboard>-->
+<!--                        </Storyboard>-->
+<!--                    </VisualTransition>-->
+<!--                    <VisualTransition From="CardSideBack" To="CardSideFace">-->
+<!--                        <Storyboard>-->
+<!--                        </Storyboard>-->
+<!--                    </VisualTransition>-->
+<!--                </VisualStateGroup.Transitions>-->
+            </VisualStateGroup>
+            <VisualStateGroup x:Name="InProgressGroup">
+                <VisualState x:Name="IdleState" />
+                <VisualState x:Name="ProgressState">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ProgressShadow" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible" />
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <i:Interaction.Behaviors>
+            <core:DataTriggerBehavior Binding="{Binding Opened}" Value="True">
+                <core:GoToStateAction StateName="CardSideBack" />
+            </core:DataTriggerBehavior>
+            <core:DataTriggerBehavior Binding="{Binding Opened}" Value="False">
+                <core:GoToStateAction StateName="CardSideFace" />
+            </core:DataTriggerBehavior>
+            <core:DataTriggerBehavior Binding="{Binding InProgress}" Value="True">
+                <core:GoToStateAction StateName="ProgressState" />
+            </core:DataTriggerBehavior>
+            <core:DataTriggerBehavior Binding="{Binding InProgress}" Value="False">
+                <core:GoToStateAction StateName="IdleState" />
+            </core:DataTriggerBehavior>
+        </i:Interaction.Behaviors>
+    </Grid>
+
+    <Page.BottomAppBar>
+        <CommandBar>
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Label="Обновить" Command="{Binding RefreshCommand}">
+                    <AppBarButton.Icon>
+                        <SymbolIcon Symbol="Refresh"></SymbolIcon>
+                    </AppBarButton.Icon>
+                </AppBarButton>
+            </CommandBar.PrimaryCommands>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Label="удалить карту" Command="{Binding DeleteCardCommand}" />
+            </CommandBar.SecondaryCommands>
+
+        </CommandBar>
+    </Page.BottomAppBar>
+</Page>
